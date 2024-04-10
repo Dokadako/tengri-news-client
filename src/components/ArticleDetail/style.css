@@ -19,6 +19,13 @@
     margin-bottom: 20px;
 }
 
+.article-detail video {
+    width: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
 .article-detail p {
     color: #666;
     line-height: 1.6;

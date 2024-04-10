@@ -56,6 +56,7 @@ const NewsList = ({source}) => {
 
 
     const handlePageChange = (newPage) => {
+        window.scrollTo(0, 0)
         setPage(newPage);
         fetchArticles(newPage);
     };
