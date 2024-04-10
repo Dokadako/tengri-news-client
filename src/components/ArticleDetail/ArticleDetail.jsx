@@ -18,11 +18,12 @@ const ArticleDetail = () => {
                 if (!id) {
                     response = await fetch(`${BACKEND_API}/articles/tengri/get-actual-detail?path=${queryParameters.get("path")}`);
                     data = await response.json();
+                    setArticleContent(data.content);
                 } else {
                     response = await fetch(`${BACKEND_API}/articles/${id}`);
                     data = await response.json();
+                    setArticleContent(data);
                 }
-                setArticleContent(data.content);
             } catch (error) {
                 console.error('Ошибка при получении детальной информации статьи:', error);
             }
@@ -47,7 +48,6 @@ const ArticleDetail = () => {
             );
         }
     };
-
     return (
         <div className="article-detail">
             <h2>{articleContent.title}</h2>
