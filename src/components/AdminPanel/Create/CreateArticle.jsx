@@ -29,7 +29,7 @@ const CreateArticle = () => {
         Object.keys(formData).forEach(key => data.append(key, formData[key]));
 
         try {
-            await axios.post('http://localhost:5000/api/articles', data, {
+            await axios.post('https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

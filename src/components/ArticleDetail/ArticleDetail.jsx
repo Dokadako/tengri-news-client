@@ -11,11 +11,11 @@ const ArticleDetail = () => {
             try {
                 const {id} = params
                 if (!id) {
-                    const response = await fetch(`http://localhost:5000/api/articles/tengri/get-actual-detail?path=${queryParameters.get("path")}`);
+                    const response = await fetch(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/tengri/get-actual-detail?path=${queryParameters.get("path")}`);
                     const data = await response.json();
                     setArticleContent(data.content);
                 } else {
-                    const response = await fetch(`http://localhost:5000/api/articles/${id}`);
+                    const response = await fetch(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`);
                     const data = await response.json();
                     setArticleContent(data);
                 }

@@ -17,7 +17,7 @@ const EditArticle = () => {
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:5000/api/articles/${id}`);
+                const { data } = await axios.get(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`);
                 setFormData(data);
             } catch (error) {
                 console.error("Failed to fetch article for editing", error);
@@ -48,7 +48,7 @@ const EditArticle = () => {
         });
 
         try {
-            await axios.put(`http://localhost:5000/api/articles/${id}`, data, {
+            await axios.put(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
