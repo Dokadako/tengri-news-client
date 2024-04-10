@@ -46,7 +46,9 @@ const AdminPanel = () => {
             {
                 articles.map(article => (
                     <NewsItem key={article.id} {...article} isAdmin={true}
-                              date={moment(article.publishedAt).calendar()}/>
+                              date={moment(article.publishedAt).calendar()}
+                              imageUrl={article.mediaUrl}
+                    />
                 ))}
             <Pagination page={currentPage} totalPages={totalPages} onPageChange={setCurrentPage}/>
 
