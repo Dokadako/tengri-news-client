@@ -4,9 +4,10 @@ import NewsItem from './NewsItem/NewsItem.jsx';
 import Pagination from './Pagination/Pagination.jsx';
 import moment from 'moment';
 import 'moment/dist/locale/ru'
+import Loader from "./Loader/index.jsx";
 
 const NewsList = ({source}) => {
-    const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [page, setPage] = useState(1);
     const [limit] = useState(10); // Можно изменить на количество статей на странице
@@ -14,6 +15,9 @@ const NewsList = ({source}) => {
     const [filteredArticles, setFilteredArticles] = useState([]);
 
     useEffect(() => {
+        if (!articles)
+            return;
+
         if (searchTerm.trim()) {
             const lowercasedFilter = searchTerm.toLowerCase();
             const filteredData = articles.filter(item => {
@@ -33,7 +37,7 @@ const NewsList = ({source}) => {
     const fetchArticles = async (currentPage) => {
         const endpoint = source === "scraping"
             ? `https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/tengri/get-actual?page=${currentPage}`
-            : `https://tengri-news-server-fb457f2a9e75.herokuapp.com/?page=${currentPage}&limit=${limit}&search=${searchTerm}`;
+            : `https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles?page=${currentPage}&limit=${limit}&search=${searchTerm}`;
         try {
             const result = await axios(endpoint);
             setTotalPages(result.data.totalPages);
@@ -52,11 +56,15 @@ const NewsList = ({source}) => {
     };
 
 
-
     const handlePageChange = (newPage) => {
         setPage(newPage);
         fetchArticles(newPage);
     };
+
+    if (!articles) {
+        return <Loader/>
+    }
+
     return (
         <div className="news-list">
             <input
@@ -66,13 +74,13 @@ const NewsList = ({source}) => {
                 placeholder="Поиск по новостям..."
             />
             {filteredArticles.length ? filteredArticles.map((article, index) => (
-                // Используйте filteredArticles для отображения списка
-                source === "scraping" ?
-                    <NewsItem key={index} {...article} link={`/article-detail?path=${article.link}`} /> :
-                    <NewsItem key={index} {...article} date={moment(article.publishedAt).calendar()}
-                              link={`/article-by-id/${article._id}`} />
-            ))
-            : <p>Пока новостей нет...</p>
+                    // Используйте filteredArticles для отображения списка
+                    source === "scraping" ?
+                        <NewsItem key={index} {...article} link={`/article-detail?path=${article.link}`}/> :
+                        <NewsItem key={index} {...article} date={moment(article.publishedAt).calendar()}
+                                  link={`/article-by-id/${article._id}`}/>
+                ))
+                : <p>Пока новостей нет...</p>
             }
             <Pagination
                 key={page} // Добавляем key для перерисовки при изменении страницы
