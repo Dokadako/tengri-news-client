@@ -32,8 +32,8 @@ const NewsList = ({source}) => {
     // Перенесите загрузку статей в отдельную функцию
     const fetchArticles = async (currentPage) => {
         const endpoint = source === "scraping"
-            ? `http://localhost:5000/api/articles/tengri/get-actual?page=${currentPage}`
-            : `http://localhost:5000/api/articles/?page=${currentPage}&limit=${limit}&search=${searchTerm}`;
+            ? `https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/tengri/get-actual?page=${currentPage}`
+            : `https://tengri-news-server-fb457f2a9e75.herokuapp.com/?page=${currentPage}&limit=${limit}&search=${searchTerm}`;
         try {
             const result = await axios(endpoint);
             setTotalPages(result.data.totalPages);
