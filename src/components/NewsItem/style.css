@@ -1,0 +1,68 @@
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-item img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.news-info {
+    flex: 1;
+    padding-right: 20px; /* To prevent title touching the buttons */
+}
+
+.news-info a {
+    margin: 0 0 10px;
+    color: #333;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.news-info p {
+    color: #666;
+}
+
+.news-actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-button,
+.delete-button {
+    padding: 10px;
+    margin: 5px 0; /* Spacing between buttons */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: opacity 0.2s ease;
+    font-size: 14px;
+    text-align: center;
+}
+
+.edit-button {
+    line-height: 1;
+    text-decoration: none;
+    background-color: #0275d8; /* Bootstrap's 'info' color */
+}
+
+.delete-button {
+    background-color: #d9534f; /* Bootstrap's 'danger' color */
+}
+
+.edit-button:hover,
+.delete-button:hover {
+    opacity: 0.8;
+}
