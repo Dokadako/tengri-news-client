@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './style.css'
+import Loader from "../../Loader/index.jsx";
 
 const CreateArticle = () => {
     const [formData, setFormData] = useState({
@@ -12,9 +13,10 @@ const CreateArticle = () => {
     });
     const [file, setFile] = useState(null);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
 
     const handleFileChange = (e) => {
@@ -29,22 +31,27 @@ const CreateArticle = () => {
         Object.keys(formData).forEach(key => data.append(key, formData[key]));
 
         try {
-            await axios.post('https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles', data, {
+            setIsLoading(true)
+            axios.post('https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
+            }).then(e => {
+                setIsLoading(false)
+                navigate('/admin');
             });
-            navigate('/admin');
         } catch (error) {
             console.error("Failed to create article", error);
         }
     };
 
+    if (isLoading)
+        return <Loader/>
+
     return (
         <div className="create-article-container">
             <h2>Create Article</h2>
             <form onSubmit={handleSubmit}>
-                {/* Title input */}
                 <div>
                     <label>Title:</label>
                     <input

@@ -32,29 +32,29 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
-    width: 100%; /* Ensure full width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 100%; 
+    box-sizing: border-box; 
 }
 
 .create-article-container textarea {
-    height: auto; /* Allow the height to grow as needed */
-    resize: vertical; /* Allow only vertical resizing */
+    height: auto; 
+    resize: vertical; 
 }
 
-/* Additional styles to align the File input */
+
 .create-article-container input[type="file"] {
     border: 1px solid #ddd;
     display: block;
     width: 100%;
-    margin-top: 5px; /* Add some space above the file input */
-    padding: 10px; /* Make it consistent with other inputs */
+    margin-top: 5px; 
+    padding: 10px; 
 }
 
 .create-article-container button {
     padding: 10px 15px;
-    margin-top: 15px; /* Add some space above the button */
-    width: 100%; /* Match the width with inputs */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin-top: 15px; 
+    width: 100%; 
+    box-sizing: border-box; 
 }
 
 
@@ -74,7 +74,7 @@
     background-color: #0056b3;
 }
 
-/* You might want to add responsiveness */
+
 @media (max-width: 768px) {
     .create-article-container {
         padding: 20px;

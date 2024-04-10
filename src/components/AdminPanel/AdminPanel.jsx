@@ -1,4 +1,4 @@
-// AdminPanel.jsx
+
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
@@ -21,12 +21,12 @@ const AdminPanel = () => {
 
     const fetchArticles = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/articles');
-            if (response.data.articles) { // Предполагаем, что API возвращает объект с полем articles
+            const response = await axios.get('https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles')
+            if (response.data.articles) {
                 setArticles(response.data.articles);
                 setTotalPages(response.data.totalPages)
             } else {
-                setArticles(response.data); // Для совместимости с предыдущим форматом ответа
+                setArticles(response.data);
             }
         } catch (error) {
             console.error("Failed to fetch articles", error);

@@ -19,7 +19,7 @@
 
 .create-new-button {
     padding: 10px 20px;
-    background-color: #5cb85c; /* Bootstrap's 'success' color */
+    background-color: #5cb85c; 
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -27,5 +27,5 @@
 }
 
 .create-new-button:hover {
-    background-color: #4cae4c; /* Darken on hover */
+    background-color: #4cae4c; 
 }

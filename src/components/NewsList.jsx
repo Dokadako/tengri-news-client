@@ -10,7 +10,7 @@ const NewsList = ({source}) => {
     const [articles, setArticles] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [page, setPage] = useState(1);
-    const [limit] = useState(10); // Можно изменить на количество статей на странице
+    const [limit] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
     const [filteredArticles, setFilteredArticles] = useState([]);
 
@@ -33,7 +33,6 @@ const NewsList = ({source}) => {
 
     moment.locale("ru")
 
-    // Перенесите загрузку статей в отдельную функцию
     const fetchArticles = async (currentPage) => {
         const endpoint = source === "scraping"
             ? `https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/tengri/get-actual?page=${currentPage}`
@@ -74,7 +73,6 @@ const NewsList = ({source}) => {
                 placeholder="Поиск по новостям..."
             />
             {filteredArticles.length ? filteredArticles.map((article, index) => (
-                    // Используйте filteredArticles для отображения списка
                     source === "scraping" ?
                         <NewsItem key={index} {...article} link={`/article-detail?path=${article.link}`}/> :
                         <NewsItem key={index} {...article} date={moment(article.publishedAt).calendar()}
@@ -83,10 +81,10 @@ const NewsList = ({source}) => {
                 : <p>Пока новостей нет...</p>
             }
             <Pagination
-                key={page} // Добавляем key для перерисовки при изменении страницы
+                key={page}
                 page={page}
                 totalPages={totalPages}
-                onPageChange={handlePageChange} // Изменяем на новый коллбэк
+                onPageChange={handlePageChange}
             />
         </div>
     );

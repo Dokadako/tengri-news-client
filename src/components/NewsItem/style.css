@@ -20,7 +20,7 @@
 
 .news-info {
     flex: 1;
-    padding-right: 20px; /* To prevent title touching the buttons */
+    padding-right: 20px; 
 }
 
 .news-info a {
@@ -42,7 +42,7 @@
 .edit-button,
 .delete-button {
     padding: 10px;
-    margin: 5px 0; /* Spacing between buttons */
+    margin: 5px 0; 
     color: #fff;
     border: none;
     cursor: pointer;
@@ -55,11 +55,11 @@
 .edit-button {
     line-height: 1;
     text-decoration: none;
-    background-color: #0275d8; /* Bootstrap's 'info' color */
+    background-color: #0275d8; 
 }
 
 .delete-button {
-    background-color: #d9534f; /* Bootstrap's 'danger' color */
+    background-color: #d9534f; 
 }
 
 .edit-button:hover,

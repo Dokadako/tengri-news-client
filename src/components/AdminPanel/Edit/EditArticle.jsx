@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
+import Loader from "../../Loader/index.jsx";
 
 const EditArticle = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: '',
@@ -13,11 +14,12 @@ const EditArticle = () => {
         imageUrl: '',
     });
     const [file, setFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                const { data } = await axios.get(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`);
+                const {data} = await axios.get(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`);
                 setFormData(data);
             } catch (error) {
                 console.error("Failed to fetch article for editing", error);
@@ -27,7 +29,7 @@ const EditArticle = () => {
     }, [id]);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
 
     const handleFileChange = (e) => {
@@ -42,22 +44,28 @@ const EditArticle = () => {
             data.append('image', file);
         }
         Object.keys(formData).forEach(key => {
-            if (key !== 'imageUrl') { // Предотвращаем добавление старого URL изображения
+            if (key !== 'imageUrl') {
                 data.append(key, formData[key]);
             }
         });
 
         try {
-            await axios.put(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`, data, {
+            setIsLoading(true)
+            axios.put(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
+            }).then(e => {
+                setIsLoading(false)
+                navigate('/admin');
             });
-            navigate('/admin');
         } catch (error) {
             console.error("Failed to update article", error);
         }
     };
+
+    if (isLoading)
+        return <Loader/>
 
     return (
         <div>

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams, useSearchParams} from 'react-router-dom';
 import './style.css'
+import Loader from "../Loader/index.jsx";
 
 const ArticleDetail = () => {
     const [articleContent, setArticleContent] = useState(null);
@@ -28,7 +29,7 @@ const ArticleDetail = () => {
     }, [queryParameters]);
 
     if (!articleContent) {
-        return <div>Loading...</div>;
+        return <Loader/>;
     }
 
     return (
