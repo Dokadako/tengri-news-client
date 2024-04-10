@@ -9,15 +9,12 @@ const Pagination = ({page, totalPages, onPageChange}) => {
     let pageNumbers = [];
 
     if (totalPages <= 5) {
-        // меньше 5 страниц - показываем все
         pageNumbers = range(1, totalPages);
     } else {
-        // больше 5 страниц - показываем часть с многоточиями
         const startPage = Math.max(1, page - 2);
         const endPage = Math.min(totalPages, page + 2);
         pageNumbers = range(startPage, endPage);
 
-        // Добавляем многоточия и первую/последнюю страницу, если это необходимо
         if (startPage > 1) {
             pageNumbers.unshift('...');
             pageNumbers.unshift(1);

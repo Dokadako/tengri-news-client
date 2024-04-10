@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useParams, useNavigate} from 'react-router-dom';
 import Loader from "../../Loader/index.jsx";
+import {BACKEND_API} from "../../../main.jsx";
+import './style.css'
 
 const EditArticle = () => {
     const {id} = useParams();
@@ -19,7 +21,7 @@ const EditArticle = () => {
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                const {data} = await axios.get(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`);
+                const {data} = await axios.get(`${BACKEND_API}/articles/${id}`);
                 setFormData(data);
             } catch (error) {
                 console.error("Failed to fetch article for editing", error);
@@ -51,7 +53,7 @@ const EditArticle = () => {
 
         try {
             setIsLoading(true)
-            axios.put(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`, data, {
+            axios.put(`${BACKEND_API}/articles/${id}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -68,7 +70,7 @@ const EditArticle = () => {
         return <Loader/>
 
     return (
-        <div>
+        <div className="edit-article-container">
             <h2>Edit Article</h2>
             <form onSubmit={handleSubmit}>
                 <label>Title:</label>

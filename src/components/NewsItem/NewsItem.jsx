@@ -2,12 +2,13 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import './style.css'
 import axios from "axios";
+import {BACKEND_API} from "../../main.jsx";
 
 const NewsItem = ({_id, title, link, imageUrl, date, isAdmin = false}) => {
 
     const deleteArticle = async (id) => {
         try {
-            await axios.delete(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`);
+            await axios.delete(`${BACKEND_API}/articles/${id}`);
             window.location.reload();
         } catch (error) {
             console.error("Failed to delete article", error);

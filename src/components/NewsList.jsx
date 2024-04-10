@@ -5,6 +5,7 @@ import Pagination from './Pagination/Pagination.jsx';
 import moment from 'moment';
 import 'moment/dist/locale/ru'
 import Loader from "./Loader/index.jsx";
+import {BACKEND_API} from "../main.jsx";
 
 const NewsList = ({source}) => {
     const [articles, setArticles] = useState(null);
@@ -35,8 +36,8 @@ const NewsList = ({source}) => {
 
     const fetchArticles = async (currentPage) => {
         const endpoint = source === "scraping"
-            ? `https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/tengri/get-actual?page=${currentPage}`
-            : `https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles?page=${currentPage}&limit=${limit}&search=${searchTerm}`;
+            ? `${BACKEND_API}/articles/tengri/get-actual?page=${currentPage}`
+            : `${BACKEND_API}/articles?page=${currentPage}&limit=${limit}&search=${searchTerm}`;
         try {
             const result = await axios(endpoint);
             setTotalPages(result.data.totalPages);
@@ -77,7 +78,8 @@ const NewsList = ({source}) => {
                     source === "scraping" ?
                         <NewsItem key={index} {...article} link={`/article-detail?path=${article.link}`}/> :
                         <NewsItem key={index} {...article} date={moment(article.publishedAt).calendar()}
-                                  link={`/article-by-id/${article._id}`}/>
+                                  link={`/article-by-id/${article._id}`}
+                                  imageUrl={article.mediaUrl}/>
                 ))
                 : <p>Пока новостей нет...</p>
             }

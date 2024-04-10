@@ -7,6 +7,7 @@ import NewsItem from "../NewsItem/NewsItem.jsx";
 import 'moment/dist/locale/ru'
 import moment from "moment";
 import './style.css'
+import {BACKEND_API} from "../../main.jsx";
 
 const AdminPanel = () => {
     const [articles, setArticles] = useState([]);
@@ -21,7 +22,7 @@ const AdminPanel = () => {
 
     const fetchArticles = async () => {
         try {
-            const response = await axios.get('https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles')
+            const response = await axios.get(`${BACKEND_API}/articles`)
             if (response.data.articles) {
                 setArticles(response.data.articles);
                 setTotalPages(response.data.totalPages)

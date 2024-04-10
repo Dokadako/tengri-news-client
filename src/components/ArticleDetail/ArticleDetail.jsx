@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams, useSearchParams} from 'react-router-dom';
 import './style.css'
 import Loader from "../Loader/index.jsx";
+import {BACKEND_API} from "../../main.jsx";
 
 const ArticleDetail = () => {
     const [articleContent, setArticleContent] = useState(null);
@@ -15,10 +16,10 @@ const ArticleDetail = () => {
                 let response, data;
 
                 if (!id) {
-                    response = await fetch(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/tengri/get-actual-detail?path=${queryParameters.get("path")}`);
+                    response = await fetch(`${BACKEND_API}/articles/tengri/get-actual-detail?path=${queryParameters.get("path")}`);
                     data = await response.json();
                 } else {
-                    response = await fetch(`https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles/${id}`);
+                    response = await fetch(`${BACKEND_API}/articles/${id}`);
                     data = await response.json();
                 }
                 setArticleContent(data.content);

@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import './style.css'
 import Loader from "../../Loader/index.jsx";
+import {BACKEND_API} from "../../../main.jsx";
 
 const CreateArticle = () => {
     const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const CreateArticle = () => {
 
         try {
             setIsLoading(true)
-            axios.post('https://tengri-news-server-fb457f2a9e75.herokuapp.com/api/articles', data, {
+            axios.post(`${BACKEND_API}/articles`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
