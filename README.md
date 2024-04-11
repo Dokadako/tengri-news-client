@@ -35,3 +35,6 @@
 1. Клонируйте репозиторий.
 2. Установите зависимости, используя npm install.
 3. Запустите приложение, используя npm start.
+
+## Updated after deadline
+Я забыл добавить ссылку https://main--tengri-news-clone.netlify.app/
